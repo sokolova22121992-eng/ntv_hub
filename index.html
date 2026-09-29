@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>NTV HUB</title>
 
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -15,244 +15,504 @@
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f7f8;
-      color: #172126;
-    }
-
-    .header {
-      background: #ffffff;
-      padding: 28px 22px 24px;
-      border-bottom: 1px solid #e6eaec;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.8px;
-    }
-
-    .subtitle {
-      margin-top: 5px;
-      color: #7b858b;
-      font-size: 14px;
+      background: linear-gradient(145deg, #f7fbff, #eef6ff);
+      color: #123b63;
     }
 
     .container {
-      padding: 22px 16px 35px;
-      max-width: 650px;
-      margin: auto;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 45px 20px 60px;
     }
 
-    .menu {
+    /* HEADER */
+
+    header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .logo {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #55c7ee, #1769d1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #6c89a5;
+      font-size: 15px;
+    }
+
+    /* MAIN GRID */
+
+    .grid {
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .item {
-      background: #ffffff;
-      border: 1px solid #e6eaec;
-      border-radius: 18px;
-      padding: 18px;
+    /* CARDS */
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #dcecff;
+      border-radius: 20px;
+      padding: 22px 18px;
+      box-shadow: 0 8px 25px rgba(31, 105, 170, 0.08);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(31, 105, 170, 0.13);
+    }
+
+    .card-header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      text-decoration: none;
-      color: inherit;
-      transition: 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      gap: 14px;
     }
 
-    .item:active {
-      transform: scale(0.98);
-    }
+    /* ICONS */
 
     .icon {
       width: 48px;
       height: 48px;
-      border-radius: 14px;
-      background: #eef3f4;
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: linear-gradient(145deg, #e8f8ff, #dcecff);
+      color: #1769d1;
       flex-shrink: 0;
     }
 
     .icon svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 1.8;
+      width: 25px;
+      height: 25px;
     }
 
-    .text {
-      font-size: 17px;
-      font-weight: 600;
+    /* TITLE */
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
     }
+
+    /* ARROW */
 
     .arrow {
       margin-left: auto;
-      color: #9aa4a9;
+      color: #8aa7c2;
+      font-size: 20px;
     }
 
-    .arrow svg {
-      width: 19px;
-      height: 19px;
-    }
+    /* SUBMENU */
 
-    .section {
-      margin-top: 12px;
-    }
-
-    .subitems {
+    .submenu {
       display: none;
-      padding: 8px 0 2px 64px;
-      gap: 8px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #e4eff8;
     }
 
-    .subitem {
-      background: #ffffff;
-      border: 1px solid #e8ecee;
-      border-radius: 12px;
-      padding: 13px 15px;
-      font-size: 14px;
-      color: #465158;
+    .submenu.open {
+      display: block;
     }
 
-    .section.open .subitems {
-      display: grid;
+    .submenu-item {
+      padding: 11px 10px;
+      margin: 4px 0;
+      border-radius: 10px;
+      color: #315b7d;
+      background: #f7fbff;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    .section.open .arrow {
-      transform: rotate(90deg);
+    .submenu-item:hover {
+      background: #edf7ff;
+      color: #1769d1;
+    }
+
+    /* NESTED MENU */
+
+    .nested {
+      margin-left: 18px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .nested.open {
+      display: block;
+    }
+
+    .nested-item {
+      padding: 9px 10px;
+      color: #55758f;
+      border-left: 2px solid #c9e9fa;
+      margin-bottom: 3px;
+      cursor: pointer;
+    }
+
+    .nested-item:hover {
+      color: #1769d1;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 30px 14px 40px;
+      }
+
+      .logo {
+        font-size: 36px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .grid {
+        gap: 12px;
+      }
+
+      .card {
+        padding: 18px 14px;
+        border-radius: 17px;
+      }
+
+      .icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+      }
+
+      .icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .title {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="logo">NTV HUB</div>
-    <div class="subtitle">Навчально-тренувальний відділ ЕМД</div>
-  </header>
+  <div class="container">
 
-  <main class="container">
+    <!-- HEADER -->
 
-    <div class="menu">
+    <header>
+      <div class="logo">NTV HUB</div>
+      <div class="subtitle">
+        Навчально-тренувальний відділ ЕМД
+      </div>
+    </header>
+
+
+    <!-- MAIN MENU -->
+
+    <div class="grid">
+
 
       <!-- 1. ЕМД -->
-      <div class="section">
-        <div class="item" onclick="toggleSection(this)">
+
+      <div class="card" onclick="toggleMenu('emd')">
+
+        <div class="card-header">
+
           <div class="icon">
-            <i data-lucide="activity"></i>
+            <i data-lucide="heart-pulse"></i>
           </div>
-          <div class="text">ЕМД</div>
+
+          <div class="title">
+            ЕМД
+          </div>
+
           <div class="arrow">
-            <i data-lucide="chevron-right"></i>
+            ⌄
           </div>
+
         </div>
 
-        <div class="subitems">
-          <div class="subitem">BLS</div>
-          <div class="subitem">ALS</div>
-          <div class="subitem">Травма</div>
-          <div class="subitem">PBLS</div>
+
+        <div id="emd" class="submenu">
+
+          <div class="submenu-item">
+            BLS
+          </div>
+
+          <div class="submenu-item">
+            PBLS
+          </div>
+
+          <div class="submenu-item">
+            ALS
+          </div>
+
+          <div class="submenu-item">
+            Травма
+          </div>
+
+          <div class="submenu-item">
+            Педіатрія
+          </div>
+
         </div>
+
       </div>
 
-      <!-- 2. Нормативна база -->
-      <div class="section">
-        <div class="item" onclick="toggleSection(this)">
+
+      <!-- 2. НАВЧАННЯ -->
+
+      <div class="card" onclick="toggleMenu('education')">
+
+        <div class="card-header">
+
           <div class="icon">
-            <i data-lucide="file-check"></i>
+            <i data-lucide="graduation-cap"></i>
           </div>
-          <div class="text">Нормативна база</div>
+
+          <div class="title">
+            НАВЧАННЯ
+          </div>
+
           <div class="arrow">
-            <i data-lucide="chevron-right"></i>
+            ⌄
           </div>
+
         </div>
 
-        <div class="subitems">
-          <div class="subitem">Документи</div>
-          <div class="subitem">Накази</div>
+
+        <div id="education" class="submenu">
+
+
+          <!-- КУРСИ -->
+
+          <div
+            class="submenu-item"
+            onclick="toggleNested(event, 'courses')"
+          >
+            Курси
+            <span style="float:right;">
+              ›
+            </span>
+          </div>
+
+
+          <!-- ОНЛАЙН / ОФЛАЙН -->
+
+          <div id="courses" class="nested">
+
+            <div class="nested-item">
+              Онлайн
+            </div>
+
+            <div class="nested-item">
+              Офлайн
+            </div>
+
+          </div>
+
+
+          <!-- ТРЕНІНГИ -->
+
+          <div class="submenu-item">
+            Тренінги
+          </div>
+
+
+          <!-- ПРАКТИЧНІ НАВИЧКИ -->
+
+          <div class="submenu-item">
+            Практичні навички
+          </div>
+
         </div>
+
       </div>
 
-      <!-- 3. Тести -->
-      <a class="item" href="#">
-        <div class="icon">
-          <i data-lucide="clipboard-check"></i>
+
+      <!-- 3. ТЕСТИ -->
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div class="icon">
+            <i data-lucide="clipboard-check"></i>
+          </div>
+
+          <div class="title">
+            ТЕСТИ
+          </div>
+
         </div>
-        <div class="text">Тести</div>
-        <div class="arrow">
-          <i data-lucide="chevron-right"></i>
-        </div>
-      </a>
+
+      </div>
+
 
       <!-- 4. БПР -->
-      <a class="item" href="#">
-        <div class="icon">
-          <i data-lucide="graduation-cap"></i>
-        </div>
-        <div class="text">БПР</div>
-        <div class="arrow">
-          <i data-lucide="chevron-right"></i>
-        </div>
-      </a>
 
-      <!-- 5. Навчання -->
-      <a class="item" href="#">
-        <div class="icon">
-          <i data-lucide="book-open"></i>
-        </div>
-        <div class="text">Навчання</div>
-        <div class="arrow">
-          <i data-lucide="chevron-right"></i>
-        </div>
-      </a>
+      <div class="card">
 
-      <!-- 6. Додатки -->
-      <a class="item" href="#">
-        <div class="icon">
-          <i data-lucide="smartphone"></i>
-        </div>
-        <div class="text">Додатки</div>
-        <div class="arrow">
-          <i data-lucide="chevron-right"></i>
-        </div>
-      </a>
+        <div class="card-header">
 
-      <!-- 7. Новини -->
-      <a class="item" href="#">
-        <div class="icon">
-          <i data-lucide="newspaper"></i>
-        </div>
-        <div class="text">Новини</div>
-        <div class="arrow">
-          <i data-lucide="chevron-right"></i>
-        </div>
-      </a>
+          <div class="icon">
+            <i data-lucide="badge-check"></i>
+          </div>
 
-      <!-- 8. Контакти -->
-      <a class="item" href="#">
-        <div class="icon">
-          <i data-lucide="contact-round"></i>
+          <div class="title">
+            БПР
+          </div>
+
         </div>
-        <div class="text">Контакти</div>
-        <div class="arrow">
-          <i data-lucide="chevron-right"></i>
+
+      </div>
+
+
+      <!-- 5. НОРМАТИВНА БАЗА -->
+
+      <div class="card" onclick="toggleMenu('norms')">
+
+        <div class="card-header">
+
+          <div class="icon">
+            <i data-lucide="file-text"></i>
+          </div>
+
+          <div class="title">
+            НОРМАТИВНА БАЗА
+          </div>
+
+          <div class="arrow">
+            ⌄
+          </div>
+
         </div>
-      </a>
+
+
+        <div id="norms" class="submenu">
+
+          <div class="submenu-item">
+            Накази
+          </div>
+
+          <div class="submenu-item">
+            Документи
+          </div>
+
+          <div class="submenu-item">
+            Протоколи
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- 6. ДОДАТКИ -->
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div class="icon">
+            <i data-lucide="layout-grid"></i>
+          </div>
+
+          <div class="title">
+            ДОДАТКИ
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- 7. НОВИНИ -->
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div class="icon">
+            <i data-lucide="newspaper"></i>
+          </div>
+
+          <div class="title">
+            НОВИНИ
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- 8. КОНТАКТИ -->
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div class="icon">
+            <i data-lucide="phone"></i>
+          </div>
+
+          <div class="title">
+            КОНТАКТИ
+          </div>
+
+        </div>
+
+      </div>
+
 
     </div>
-  </main>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
 
   <script>
+
     lucide.createIcons();
 
-    function toggleSection(element) {
-      const section = element.parentElement;
-      section.classList.toggle("open");
+
+    function toggleMenu(id) {
+
+      const menu = document.getElementById(id);
+
+      menu.classList.toggle("open");
+
     }
+
+
+    function toggleNested(event, id) {
+
+      event.stopPropagation();
+
+      const menu = document.getElementById(id);
+
+      menu.classList.toggle("open");
+
+    }
+
   </script>
 
 </body>

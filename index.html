@@ -1,560 +1,917 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTV HUB</title>
 
-  <title>NTV HUB</title>
+<script src="https://unpkg.com/lucide@latest"></script>
 
-  <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #eaf8ff 0%, #f8fcff 100%);
+  color: #163f5c;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #eaf8ff 0%, #f8fcff 100%);
-      color: #123b5d;
-    }
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
 
-    /* =========================
-       MAIN SCREEN
-    ========================= */
+/* =========================
+   MAIN
+========================= */
 
-    .main-screen {
-      min-height: 100vh;
-      padding: 24px 14px 20px;
-      position: relative;
-    }
+.screen {
+  min-height: 100vh;
+}
 
-    .header {
-      text-align: center;
-      padding-top: 8px;
-      margin-bottom: 16px;
-    }
+.main-screen {
+  position: relative;
+  padding: 24px 14px 30px;
+}
 
-    .header h1 {
-      margin: 0;
-      font-size: 28px;
-      font-weight: 800;
-      color: #1769d1;
-      letter-spacing: .5px;
-    }
+.header {
+  text-align: center;
+  padding-top: 8px;
+  margin-bottom: 18px;
+}
 
-    .header p {
-      margin: 5px 0 0;
-      font-size: 13px;
-      color: #52718a;
-    }
+.header h1 {
+  margin: 0;
+  color: #1769d1;
+  font-size: 29px;
+  font-weight: 800;
+}
 
-    /* Main hamburger */
+.header p {
+  margin: 5px 0 0;
+  color: #59778d;
+  font-size: 13px;
+}
 
-    .main-menu-button {
-      position: absolute;
-      right: 14px;
-      top: 55px;
-      width: 54px;
-      height: 54px;
-      border: none;
-      border-radius: 16px;
-      background: white;
-      color: #1769d1;
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 5px 16px rgba(31,105,170,.14);
-      z-index: 100;
-      cursor: pointer;
-    }
+/* ГОЛОВНЕ ☰ — СПРАВА ЗВЕРХУ */
 
-    /* Main grid */
+.main-menu-button {
+  position: absolute;
+  right: 14px;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 15px;
+  background: white;
+  color: #1769d1;
+  font-size: 27px;
+  box-shadow: 0 5px 18px rgba(31,105,170,.14);
+  z-index: 20;
+}
 
-    .menu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 9px;
-      max-width: 620px;
-      margin: 0 auto;
-    }
+/* MENU */
 
-    .menu-card {
-      min-height: 74px;
-      border: none;
-      border-radius: 17px;
-      background: rgba(255,255,255,.94);
-      box-shadow: 0 5px 16px rgba(31,105,170,.10);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: #1769d1;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.menu-grid {
+  max-width: 620px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
 
-    .menu-card svg {
-      width: 23px;
-      height: 23px;
-      stroke-width: 1.8;
-    }
+.menu-card {
+  min-height: 74px;
+  border: 0;
+  border-radius: 17px;
+  background: rgba(255,255,255,.96);
+  color: #1769d1;
+  box-shadow: 0 5px 16px rgba(31,105,170,.10);
 
-    .menu-card:active,
-    .main-menu-button:active,
-    .chat-menu-button:active {
-      transform: scale(.97);
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 
-    /* Actual today */
+  font-size: 12px;
+  font-weight: 700;
+}
 
-    .actual-title {
-      max-width: 620px;
-      margin: 12px auto 0;
-      height: 31px;
-      border-radius: 10px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid #dcecff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #6b8aa2;
-    }
+.menu-card svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 1.8;
+}
 
-    .logo-image {
-      display: block;
-      width: 85px;
-      height: 85px;
-      object-fit: contain;
-      margin: 12px auto 0;
-      opacity: 0.4;
-    }
+/* АКТУАЛЬНЕ */
 
-    /* =========================
-       CHAT SCREEN
-    ========================= */
+.actual-title {
+  max-width: 620px;
+  height: 32px;
+  margin: 12px auto 0;
 
-    .chat-screen {
-      display: none;
-      min-height: 100vh;
-      background: #f4fbff;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .chat-screen.active {
-      display: flex;
-      flex-direction: column;
-    }
+  border-radius: 10px;
+  border: 1px solid #dcecff;
+  background: rgba(255,255,255,.75);
 
-    .chat-header {
-      height: 70px;
-      background: linear-gradient(135deg, #1769d1, #159bd7);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 800;
-      box-shadow: 0 3px 12px rgba(23,105,209,.20);
-    }
+  color: #6c899d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 
-    /* Separate hamburger bar */
+.logo-image {
+  display: block;
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+  margin: 12px auto 0;
+  opacity: .4;
+}
 
-    .chat-menu-bar {
-      height: 70px;
-      display: flex;
-      align-items: center;
-      padding: 8px 14px;
-      background: #eef7fb;
-      border-bottom: 1px solid #dcecff;
-    }
+/* =========================
+   INNER PAGES
+========================= */
 
-    .chat-menu-button {
-      width: 54px;
-      height: 54px;
-      border: none;
-      border-radius: 16px;
-      background: white;
-      color: #1769d1;
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 5px 16px rgba(31,105,170,.14);
-      z-index: 300;
-      cursor: pointer;
-    }
+.inner-screen {
+  display: none;
+  min-height: 100vh;
+  padding: 0 14px 30px;
+}
 
-    .chat-body {
-      height: calc(100vh - 140px);
-      display: flex;
-      flex-direction: column;
-      padding: 14px;
-    }
+.inner-screen.active {
+  display: block;
+}
 
-    .chat-placeholder {
-      flex: 1;
-      border-radius: 18px;
-      background: white;
-      border: 1px solid #e0eef6;
-      box-shadow: 0 4px 15px rgba(31,105,170,.07);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #7b96aa;
-      font-size: 14px;
-      padding: 20px;
-    }
+.inner-header {
+  height: 70px;
+  margin: 0 -14px 15px;
+  padding: 0 16px;
 
-    .chat-input-area {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    .chat-input {
-      flex: 1;
-      height: 48px;
-      border: 1px solid #d7e8f2;
-      border-radius: 15px;
-      padding: 0 15px;
-      background: white;
-      outline: none;
-      font-size: 14px;
-    }
+  background: linear-gradient(135deg, #1769d1, #159bd7);
+  color: white;
+}
 
-    .chat-send {
-      width: 48px;
-      height: 48px;
-      border: none;
-      border-radius: 15px;
-      background: #1769d1;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.back-button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 13px;
+  background: rgba(255,255,255,.18);
+  color: white;
+  font-size: 22px;
+}
 
-    .chat-send svg {
-      width: 20px;
-    }
+.inner-title {
+  font-size: 19px;
+  font-weight: 800;
+}
 
-    /* =========================
-       SIDE PANEL
-    ========================= */
+.submenu {
+  max-width: 620px;
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
 
-    .side-panel-background {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background: rgba(10,45,75,.30);
-    }
+.submenu-item {
+  min-height: 58px;
+  padding: 12px 16px;
 
-    .side-panel-background.open {
-      display: block;
-    }
+  border: 0;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 4px 14px rgba(31,105,170,.09);
 
-    .side-panel {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: min(310px, 84vw);
-      height: 100%;
-      background: white;
-      padding: 25px 15px;
-      box-shadow: 7px 0 25px rgba(0,0,0,.18);
-      overflow-y: auto;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    .side-panel-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: #1769d1;
-      margin: 0 0 20px 8px;
-    }
+  color: #245675;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
 
-    .side-item {
-      width: 100%;
-      min-height: 54px;
-      border: none;
-      border-radius: 14px;
-      background: #f4faff;
-      margin-bottom: 8px;
-      padding: 0 15px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-align: left;
-      color: #245675;
-      font-size: 14px;
-      font-weight: 650;
-      cursor: pointer;
-    }
+.submenu-item span:last-child {
+  color: #1769d1;
+  font-size: 20px;
+}
 
-    .side-item:active {
-      transform: scale(.98);
-    }
+/* =========================
+   CHAT
+========================= */
 
-    .side-item-icon {
-      width: 28px;
-      text-align: center;
-      font-size: 20px;
-    }
+.chat-screen {
+  display: none;
+  min-height: 100vh;
+  background: #f4fbff;
+}
 
-    /* Developer */
+.chat-screen.active {
+  display: flex;
+  flex-direction: column;
+}
 
-    .developer-credit {
-      position: fixed;
-      right: 10px;
-      bottom: 8px;
-      z-index: 40;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .4px;
-      color: transparent;
-      -webkit-text-stroke: 0.6px rgba(23,105,209,.45);
-      opacity: .65;
-      pointer-events: none;
-      white-space: nowrap;
-    }
+.chat-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    @media (max-width: 420px) {
+  background: linear-gradient(135deg, #1769d1, #159bd7);
+  color: white;
 
-      .main-screen {
-        padding-top: 20px;
-      }
+  font-size: 20px;
+  font-weight: 800;
+}
 
-      .header h1 {
-        font-size: 26px;
-      }
+/* ☰ У ЧАТІ — ЗЛІВА ПІД НАПИСОМ */
 
-      .header p {
-        font-size: 12px;
-      }
+.chat-menu-bar {
+  height: 68px;
+  padding: 8px 14px;
 
-      .main-menu-button {
-        top: 52px;
-      }
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
-      .menu-card {
-        min-height: 70px;
-      }
+  background: #eef7fb;
+  border-bottom: 1px solid #dcecff;
+}
 
-      .menu-card svg {
-        width: 21px;
-        height: 21px;
-      }
-    }
-  </style>
+.chat-menu-button {
+  width: 50px;
+  height: 50px;
+
+  border: 0;
+  border-radius: 15px;
+  background: white;
+  color: #1769d1;
+
+  font-size: 27px;
+
+  box-shadow: 0 5px 16px rgba(31,105,170,.14);
+}
+
+.chat-body {
+  flex: 1;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-placeholder {
+  flex: 1;
+
+  border-radius: 18px;
+  background: white;
+  border: 1px solid #e0eef6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #7b96aa;
+  font-size: 14px;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chat-input {
+  flex: 1;
+  height: 48px;
+
+  border: 1px solid #d7e8f2;
+  border-radius: 15px;
+
+  padding: 0 15px;
+  background: white;
+  outline: none;
+}
+
+.chat-send {
+  width: 48px;
+  height: 48px;
+
+  border: 0;
+  border-radius: 15px;
+
+  background: #1769d1;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   SIDE PANEL
+========================= */
+
+.side-panel-background {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  background: rgba(10,45,75,.32);
+}
+
+.side-panel-background.open {
+  display: block;
+}
+
+.side-panel {
+  width: min(310px, 84vw);
+  height: 100%;
+
+  background: white;
+
+  padding: 25px 15px;
+
+  box-shadow: 7px 0 25px rgba(0,0,0,.18);
+
+  overflow-y: auto;
+}
+
+.side-panel-title {
+  margin: 0 0 20px 8px;
+
+  color: #1769d1;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.side-item {
+  width: 100%;
+  min-height: 55px;
+
+  margin-bottom: 8px;
+  padding: 0 14px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: #f4faff;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #245675;
+  font-size: 14px;
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.side-icon {
+  width: 28px;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* =========================
+   DEVELOPER
+========================= */
+
+.developer-credit {
+  position: fixed;
+  right: 10px;
+  bottom: 8px;
+
+  z-index: 40;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .4px;
+
+  color: transparent;
+  -webkit-text-stroke: .6px rgba(23,105,209,.45);
+
+  opacity: .65;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@media (max-width:420px) {
+
+  .header h1 {
+    font-size: 27px;
+  }
+
+  .header p {
+    font-size: 12px;
+  }
+
+  .menu-card {
+    min-height: 70px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       MAIN
-  ========================= -->
+<!-- =========================
+     ГОЛОВНА
+========================= -->
 
-  <main class="main-screen" id="mainScreen">
+<section id="mainScreen" class="screen main-screen">
 
-    <button class="main-menu-button" onclick="openChat()" aria-label="Відкрити чат">
+  <!-- ☰ СПРАВА ЗВЕРХУ -->
+  <button class="main-menu-button" onclick="openChat()">☰</button>
+
+  <header class="header">
+    <h1>NTV HUB</h1>
+    <p>Навчально-тренувальний відділ ЕМД м. Рівне</p>
+  </header>
+
+  <div class="menu-grid">
+
+    <button class="menu-card" onclick="openPage('emdPage')">
+      <i data-lucide="heart-pulse"></i>
+      <span>ЕМД</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('learningPage')">
+      <i data-lucide="graduation-cap"></i>
+      <span>НАВЧАННЯ</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('testsPage')">
+      <i data-lucide="clipboard-check"></i>
+      <span>ТЕСТИ</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('bprPage')">
+      <i data-lucide="award"></i>
+      <span>БПР</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('normPage')">
+      <i data-lucide="book-open"></i>
+      <span>НОРМАТИВНА БАЗА</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('appsPage')">
+      <i data-lucide="grid-2x2"></i>
+      <span>ДОДАТКИ</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('newsPage')">
+      <i data-lucide="newspaper"></i>
+      <span>НОВИНИ</span>
+    </button>
+
+    <button class="menu-card" onclick="openPage('contactsPage')">
+      <i data-lucide="contact"></i>
+      <span>КОНТАКТИ</span>
+    </button>
+
+  </div>
+
+  <div class="actual-title">
+    АКТУАЛЬНЕ СЬОГОДНІ
+  </div>
+
+  <img
+    src="IMG_3499.jpeg"
+    class="logo-image"
+    alt=""
+  >
+
+</section>
+
+
+<!-- =========================
+     ЕМД
+========================= -->
+
+<section id="emdPage" class="inner-screen">
+
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">ЕМД</div>
+  </div>
+
+  <div class="submenu">
+
+    <button class="submenu-item">
+      <span>BLS</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>PBLS</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>ALS</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Травма</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Педіатрія</span>
+      <span>›</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     НАВЧАННЯ
+========================= -->
+
+<section id="learningPage" class="inner-screen">
+
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">НАВЧАННЯ</div>
+  </div>
+
+  <div class="submenu">
+
+    <button class="submenu-item" onclick="openPage('coursesPage')">
+      <span>Курси</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Тренінги</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Практичні навички</span>
+      <span>›</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     КУРСИ
+========================= -->
+
+<section id="coursesPage" class="inner-screen">
+
+  <div class="inner-header">
+    <button class="back-button" onclick="openPage('learningPage')">‹</button>
+    <div class="inner-title">КУРСИ</div>
+  </div>
+
+  <div class="submenu">
+
+    <button class="submenu-item">
+      <span>Онлайн</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Офлайн</span>
+      <span>›</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     НОРМАТИВНА БАЗА
+========================= -->
+
+<section id="normPage" class="inner-screen">
+
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">НОРМАТИВНА БАЗА</div>
+  </div>
+
+  <div class="submenu">
+
+    <button class="submenu-item">
+      <span>Накази</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Документи</span>
+      <span>›</span>
+    </button>
+
+    <button class="submenu-item">
+      <span>Протоколи</span>
+      <span>›</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ІНШІ РОЗДІЛИ
+========================= -->
+
+<section id="testsPage" class="inner-screen">
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">ТЕСТИ</div>
+  </div>
+  <div class="submenu">
+    <button class="submenu-item">
+      <span>Тести NTV HUB</span>
+      <span>›</span>
+    </button>
+  </div>
+</section>
+
+
+<section id="bprPage" class="inner-screen">
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">БПР</div>
+  </div>
+  <div class="submenu">
+    <button class="submenu-item">
+      <span>Заходи БПР</span>
+      <span>›</span>
+    </button>
+  </div>
+</section>
+
+
+<section id="appsPage" class="inner-screen">
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">ДОДАТКИ</div>
+  </div>
+  <div class="submenu">
+    <button class="submenu-item">
+      <span>Додані інструменти та застосунки</span>
+      <span>›</span>
+    </button>
+  </div>
+</section>
+
+
+<section id="newsPage" class="inner-screen">
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">НОВИНИ</div>
+  </div>
+  <div class="submenu">
+    <button class="submenu-item">
+      <span>Новини NTV HUB</span>
+      <span>›</span>
+    </button>
+  </div>
+</section>
+
+
+<section id="contactsPage" class="inner-screen">
+  <div class="inner-header">
+    <button class="back-button" onclick="goHome()">‹</button>
+    <div class="inner-title">КОНТАКТИ</div>
+  </div>
+  <div class="submenu">
+    <button class="submenu-item">
+      <span>Контакти НТВ</span>
+      <span>›</span>
+    </button>
+  </div>
+</section>
+
+
+<!-- =========================
+     ЧАТ
+========================= -->
+
+<section id="chatScreen" class="chat-screen">
+
+  <div class="chat-header">
+    💬 ЧАТ
+  </div>
+
+  <!-- ☰ ЗЛІВА ПІД ЧАТОМ -->
+  <div class="chat-menu-bar">
+
+    <button
+      class="chat-menu-button"
+      onclick="openSidePanel()"
+    >
       ☰
     </button>
 
-    <header class="header">
-      <h1>NTV HUB</h1>
-      <p>Навчально-тренувальний відділ ЕМД м. Рівне</p>
-    </header>
+  </div>
 
-    <section class="menu-grid">
+  <div class="chat-body">
 
-      <button class="menu-card">
-        <i data-lucide="heart-pulse"></i>
-        <span>ЕМД</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="graduation-cap"></i>
-        <span>НАВЧАННЯ</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="clipboard-check"></i>
-        <span>ТЕСТИ</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="award"></i>
-        <span>БПР</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="book-open"></i>
-        <span>НОРМАТИВНА БАЗА</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="grid-2x2"></i>
-        <span>ДОДАТКИ</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="newspaper"></i>
-        <span>НОВИНИ</span>
-      </button>
-
-      <button class="menu-card">
-        <i data-lucide="contact"></i>
-        <span>КОНТАКТИ</span>
-      </button>
-
-    </section>
-
-    <div class="actual-title">
-      АКТУАЛЬНЕ СЬОГОДНІ
+    <div class="chat-placeholder">
+      Тут буде робочий чат NTV HUB
     </div>
 
-    <img
-      src="IMG_3499.jpeg"
-      alt=""
-      class="logo-image"
-    >
+    <div class="chat-input-area">
 
-  </main>
-
-
-  <!-- =========================
-       CHAT
-  ========================= -->
-
-  <section class="chat-screen" id="chatScreen">
-
-    <div class="chat-header">
-      💬 ЧАТ
-    </div>
-
-    <div class="chat-menu-bar">
-      <button
-        class="chat-menu-button"
-        onclick="openSidePanel()"
-        aria-label="Відкрити меню"
+      <input
+        class="chat-input"
+        type="text"
+        placeholder="Написати повідомлення..."
       >
-        ☰
+
+      <button class="chat-send">
+        <i data-lucide="send"></i>
       </button>
-    </div>
-
-    <div class="chat-body">
-
-      <div class="chat-placeholder">
-        Тут буде робочий чат NTV HUB
-      </div>
-
-      <div class="chat-input-area">
-
-        <input
-          class="chat-input"
-          type="text"
-          placeholder="Написати повідомлення..."
-        >
-
-        <button class="chat-send">
-          <i data-lucide="send"></i>
-        </button>
-
-      </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- =========================
-       SIDE PANEL
-  ========================= -->
+<!-- =========================
+     БІЧНЕ МЕНЮ
+========================= -->
 
-  <div
-    class="side-panel-background"
-    id="sidePanelBackground"
-    onclick="closeSidePanel(event)"
+<div
+  id="sidePanelBackground"
+  class="side-panel-background"
+  onclick="closeSidePanel(event)"
+>
+
+  <aside
+    class="side-panel"
+    onclick="event.stopPropagation()"
   >
 
-    <aside class="side-panel">
+    <h2 class="side-panel-title">
+      NTV HUB
+    </h2>
 
-      <h2 class="side-panel-title">
-        NTV HUB
-      </h2>
+    <button
+      class="side-item"
+      onclick="closeSidePanel()"
+    >
+      <span class="side-icon">💬</span>
+      <span>ЧАТ</span>
+    </button>
 
-      <button class="side-item">
-        <span class="side-item-icon">💬</span>
-        <span>ЧАТ</span>
-      </button>
+    <button class="side-item">
+      <span class="side-icon">🩺</span>
+      <span>КЕЙСИ</span>
+    </button>
 
-      <button class="side-item">
-        <span class="side-item-icon">🩺</span>
-        <span>КЕЙСИ</span>
-      </button>
+    <button class="side-item">
+      <span class="side-icon">📅</span>
+      <span>КАЛЕНДАР НАВЧАНЬ</span>
+    </button>
 
-      <button class="side-item">
-        <span class="side-item-icon">📅</span>
-        <span>КАЛЕНДАР НАВЧАНЬ</span>
-      </button>
+    <button class="side-item">
+      <span class="side-icon">📢</span>
+      <span>ОГОЛОШЕННЯ</span>
+    </button>
 
-      <button class="side-item">
-        <span class="side-item-icon">📢</span>
-        <span>ОГОЛОШЕННЯ</span>
-      </button>
+    <button class="side-item">
+      <span class="side-icon">⚠️</span>
+      <span>ПОВІДОМИТИ ПРО ПРОБЛЕМУ</span>
+    </button>
 
-      <button class="side-item">
-        <span class="side-item-icon">⚠️</span>
-        <span>ПОВІДОМИТИ ПРО ПРОБЛЕМУ</span>
-      </button>
+  </aside>
 
-    </aside>
-
-  </div>
-
-
-  <div class="developer-credit">
-    Розробник: Анна Соколова
-  </div>
+</div>
 
 
-  <script>
+<!-- =========================
+     РОЗРОБНИК
+========================= -->
 
-    lucide.createIcons();
+<div class="developer-credit">
+  Розробник: Анна Соколова
+</div>
 
-    function openChat() {
-      document
-        .getElementById("chatScreen")
-        .classList.add("active");
-    }
 
-    function openSidePanel() {
-      document
-        .getElementById("sidePanelBackground")
-        .classList.add("open");
-    }
+<script>
 
-    function closeSidePanel(event) {
-      if (
-        !event ||
-        event.target === document.getElementById("sidePanelBackground")
-      ) {
-        document
-          .getElementById("sidePanelBackground")
-          .classList.remove("open");
-      }
-    }
+/* Ініціалізація іконок */
+lucide.createIcons();
 
-  </script>
+
+/* =========================
+   ПЕРЕМИКАННЯ СТОРІНОК
+========================= */
+
+function hideAllPages() {
+
+  document.querySelectorAll(".inner-screen").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("mainScreen").style.display = "none";
+  document.getElementById("chatScreen").classList.remove("active");
+}
+
+
+function openPage(pageId) {
+
+  hideAllPages();
+
+  var page = document.getElementById(pageId);
+
+  if (page) {
+    page.classList.add("active");
+  }
+}
+
+
+function goHome() {
+
+  document.querySelectorAll(".inner-screen").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("chatScreen").classList.remove("active");
+
+  document.getElementById("mainScreen").style.display = "block";
+}
+
+
+/* =========================
+   ЧАТ
+========================= */
+
+function openChat() {
+
+  document.getElementById("mainScreen").style.display = "none";
+
+  document.querySelectorAll(".inner-screen").forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  document.getElementById("chatScreen").classList.add("active");
+}
+
+
+/* =========================
+   БІЧНЕ МЕНЮ
+========================= */
+
+function openSidePanel() {
+
+  document
+    .getElementById("sidePanelBackground")
+    .classList.add("open");
+}
+
+
+function closeSidePanel(event) {
+
+  if (
+    !event ||
+    event.target === document.getElementById("sidePanelBackground")
+  ) {
+
+    document
+      .getElementById("sidePanelBackground")
+      .classList.remove("open");
+  }
+}
+
+</script>
 
 </body>
 </html>

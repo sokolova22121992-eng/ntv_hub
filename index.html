@@ -8,7 +8,77 @@
 
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <style>
+  <style> 
+    .menu-btn {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 1000;
+  border: none;
+  background: white;
+  border-radius: 12px;
+  padding: 10px 13px;
+  font-size: 22px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+
+.chat-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #eef7fb;
+  z-index: 900;
+}
+
+.chat-screen.active {
+  display: block;
+}
+
+.chat-header {
+  background: #1683d8;
+  color: white;
+  padding: 18px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.chat-menu-btn {
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 25px;
+}
+
+.side-panel {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: white;
+  padding: 70px 15px 20px;
+  box-shadow: 4px 0 15px rgba(0,0,0,.15);
+}
+
+.side-panel.open {
+  display: block;
+}
+
+.side-panel button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 12px;
+  background: #eef7fb;
+  text-align: left;
+  font-size: 16px;
+}
     * {
       box-sizing: border-box;
     }
@@ -261,11 +331,30 @@
         font-size: 11px;
       }
     }
-  </style>
+  </style> 
 </head>
 
 <body>
+<button class="menu-btn" onclick="openChat()">☰</button>
 
+<div id="chatScreen" class="chat-screen">
+  <button class="chat-menu-btn" onclick="toggleSidePanel()">☰</button>
+
+  <div class="chat-header">💬 ЧАТ</div>
+
+  <div class="chat-messages">
+    <p>Чат NTV HUB</p>
+  </div>
+
+  <div id="sidePanel" class="side-panel">
+    <button>💬 ЧАТ</button>
+    <button>🩺 КЕЙСИ</button>
+    <button>📅 КАЛЕНДАР НАВЧАНЬ</button>
+    <button>📢 ОГОЛОШЕННЯ</button>
+    <button>⚠️ ПОВІДОМИТИ ПРО ПРОБЛЕМУ</button>
+  </div>
+</div>
+  
   <div class="container">
 
     <!-- HEADER -->
@@ -532,7 +621,13 @@
 
 
   <script>
+function openChat() {
+  document.getElementById("chatScreen").classList.add("active");
+}
 
+function toggleSidePanel() {
+  document.getElementById("sidePanel").classList.toggle("open");
+}
     lucide.createIcons();
 
     function toggleMenu(id) {

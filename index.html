@@ -2,542 +2,341 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NTV HUB</title>
-
-<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
-html,
 body {
   margin: 0;
-  min-height: 100%;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: linear-gradient(180deg, #eaf8ff 0%, #f8fcff 100%);
-  color: #173f5c;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(160deg, #eef8ff, #dceeff);
+  color: #164b78;
+  min-height: 100vh;
 }
 
 button {
-  font: inherit;
-  border: 0;
+  font-family: inherit;
   cursor: pointer;
 }
 
-button:active {
-  transform: scale(.98);
+.app {
+  min-height: 100vh;
+  padding: 24px 14px 45px;
+}
+
+.page {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.page.active {
+  display: block;
 }
 
 /* =========================
-   ГОЛОВНА
+   ГОЛОВНЕ МЕНЮ
 ========================= */
 
-.main-screen {
-  min-height: 100vh;
-  padding:
-    calc(18px + env(safe-area-inset-top))
-    max(14px, env(safe-area-inset-right))
-    calc(25px + env(safe-area-inset-bottom))
-    max(14px, env(safe-area-inset-left));
-}
-
-.header {
+.main-header {
   text-align: center;
-  padding-top: 8px;
-  margin-bottom: 18px;
-  padding-left: 55px;
-  padding-right: 55px;
+  padding: 18px 45px 18px;
+  position: relative;
 }
 
-.header h1 {
-  margin: 0;
-  color: #1769d1;
-  font-size: clamp(25px, 7vw, 30px);
-  line-height: 1.1;
+.logo-title {
+  font-size: 30px;
   font-weight: 800;
+  letter-spacing: 2px;
+  color: #1769d1;
 }
 
-.header p {
-  margin: 6px auto 0;
-  color: #58788e;
-  font-size: clamp(11px, 3.2vw, 13px);
+.subtitle {
+  margin-top: 7px;
+  font-size: 14px;
+  color: #4b7394;
   line-height: 1.3;
 }
 
-/* ГОЛОВНЕ ☰ — СПРАВА ЗВЕРХУ */
-
-.main-menu-button {
+/* головне ☰ */
+.main-menu-btn {
   position: absolute;
-  top: calc(18px + env(safe-area-inset-top));
-  right: max(14px, env(safe-area-inset-right));
-
-  width: 50px;
-  height: 50px;
-
-  border-radius: 15px;
-  background: white;
+  right: 0;
+  top: 18px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(23,105,209,.25);
+  border-radius: 12px;
+  background: rgba(255,255,255,.72);
   color: #1769d1;
-
-  font-size: 27px;
-  line-height: 1;
-
-  box-shadow: 0 5px 18px rgba(31,105,170,.14);
-
-  z-index: 50;
+  font-size: 24px;
 }
 
-/* ГОЛОВНЕ МЕНЮ */
+/* =========================
+   КАРТКИ
+========================= */
 
 .menu-grid {
-  width: min(100%, 620px);
-  margin: 0 auto;
-
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(7px, 2vw, 10px);
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.menu-card {
-  min-height: clamp(67px, 17vw, 78px);
-
+.menu-btn {
+  min-height: 68px;
+  border: 1px solid rgba(23,105,209,.18);
   border-radius: 17px;
-  background: rgba(255,255,255,.96);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 5px 15px rgba(30,100,150,.08);
   color: #1769d1;
-
-  box-shadow: 0 5px 16px rgba(31,105,170,.10);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-
-  padding: 8px 5px;
-
-  font-size: clamp(10px, 2.8vw, 12px);
+  font-size: 14px;
   font-weight: 700;
+  padding: 10px;
+  transition: .15s;
+}
+
+.menu-btn:active {
+  transform: scale(.97);
+}
+
+.menu-icon {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+
+/* =========================
+   АКТУАЛЬНЕ
+========================= */
+
+.today {
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(23,105,209,.15);
   text-align: center;
-}
-
-.menu-card svg {
-  width: clamp(21px, 6vw, 24px);
-  height: clamp(21px, 6vw, 24px);
-  stroke-width: 1.8;
-  flex-shrink: 0;
-}
-
-/* АКТУАЛЬНЕ */
-
-.actual-title {
-  width: min(100%, 620px);
-  height: 32px;
-
-  margin: 12px auto 0;
-
-  border-radius: 10px;
-  border: 1px solid #dcecff;
-  background: rgba(255,255,255,.75);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #6c899d;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: .7px;
+  color: #4c7390;
 }
 
-.logo-image {
+.main-logo {
   display: block;
   width: 85px;
   height: 85px;
   object-fit: contain;
-  margin: 12px auto 0;
+  margin: 18px auto 0;
   opacity: .4;
 }
-
-/* =========================
-   ВНУТРІШНІ СТОРІНКИ
-========================= */
-
-.inner-screen {
-  display: none;
-  min-height: 100vh;
-
-  padding:
-    env(safe-area-inset-top)
-    max(14px, env(safe-area-inset-right))
-    calc(25px + env(safe-area-inset-bottom))
-    max(14px, env(safe-area-inset-left));
-}
-
-.inner-screen.active {
-  display: block;
-}
-
-.inner-header {
-  min-height: 70px;
-
-  margin:
-    0
-    calc(-1 * max(14px, env(safe-area-inset-right)))
-    15px
-    calc(-1 * max(14px, env(safe-area-inset-left)));
-
-  padding: 10px 16px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  background: linear-gradient(135deg, #1769d1, #159bd7);
-  color: white;
-}
-
-.back-button {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-
-  border-radius: 13px;
-  background: rgba(255,255,255,.18);
-  color: white;
-
-  font-size: 27px;
-}
-
-.inner-title {
-  font-size: clamp(17px, 5vw, 20px);
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.submenu {
-  width: min(100%, 620px);
-  margin: 0 auto;
-
-  display: grid;
-  gap: 9px;
-}
-
-.submenu-item {
-  width: 100%;
-  min-height: 57px;
-
-  padding: 11px 15px;
-
-  border-radius: 15px;
-  background: white;
-
-  box-shadow: 0 4px 14px rgba(31,105,170,.09);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-
-  color: #245675;
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-}
-
-.submenu-arrow {
-  color: #1769d1;
-  font-size: 21px;
-  flex-shrink: 0;
-}
-
-/* =========================
-   ЧАТ
-========================= */
-
-.chat-screen {
-  display: none;
-  min-height: 100vh;
-  background: #f4fbff;
-
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.chat-screen.active {
-  display: flex;
-  flex-direction: column;
-}
-
-/* напис ЧАТ */
-
-.chat-header {
-  min-height: 70px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: linear-gradient(135deg, #1769d1, #159bd7);
-  color: white;
-
-  font-size: 20px;
-  font-weight: 800;
-}
-
-/* ☰ ЗЛІВА ПІД ЧАТОМ */
-
-.chat-menu-bar {
-  padding: 9px 14px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-
-  background: #eef7fb;
-  border-bottom: 1px solid #dcecff;
-}
-
-.chat-menu-button {
-  width: 50px;
-  height: 50px;
-
-  border-radius: 15px;
-  background: white;
-  color: #1769d1;
-
-  font-size: 27px;
-  line-height: 1;
-
-  box-shadow: 0 5px 16px rgba(31,105,170,.14);
-}
-
-/* ПОВЕРНУТИСЯ НА ГОЛОВНЕ */
-
-.home-return-button {
-  min-height: 42px;
-
-  padding: 8px 13px;
-
-  border-radius: 12px;
-  background: white;
-  color: #1769d1;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  box-shadow: 0 4px 12px rgba(31,105,170,.10);
-}
-
-.chat-body {
-  flex: 1;
-
-  min-height: 0;
-
-  padding: 14px;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.chat-placeholder {
-  flex: 1;
-  min-height: 180px;
-
-  border-radius: 18px;
-  background: white;
-  border: 1px solid #e0eef6;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  text-align: center;
-  color: #7b96aa;
-  font-size: 14px;
-}
-
-.chat-input-area {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.chat-input {
-  min-width: 0;
-  flex: 1;
-
-  height: 48px;
-
-  padding: 0 14px;
-
-  border: 1px solid #d7e8f2;
-  border-radius: 15px;
-
-  background: white;
-  outline: none;
-
-  font-size: 14px;
-}
-
-.chat-send {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-
-  border-radius: 15px;
-  background: #1769d1;
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* =========================
-   БІЧНЕ МЕНЮ
-========================= */
-
-.side-panel-background {
-  position: fixed;
-  inset: 0;
-
-  display: none;
-
-  z-index: 1000;
-
-  background: rgba(10,45,75,.32);
-}
-
-.side-panel-background.open {
-  display: block;
-}
-
-.side-panel {
-  width: min(310px, 84vw);
-  height: 100%;
-
-  padding:
-    calc(25px + env(safe-area-inset-top))
-    15px
-    calc(25px + env(safe-area-inset-bottom));
-
-  background: white;
-
-  box-shadow: 7px 0 25px rgba(0,0,0,.18);
-
-  overflow-y: auto;
-}
-
-.side-panel-title {
-  margin: 0 0 20px 8px;
-
-  color: #1769d1;
-  font-size: 21px;
-  font-weight: 800;
-}
-
-.side-item {
-  width: 100%;
-  min-height: 55px;
-
-  margin-bottom: 8px;
-  padding: 0 14px;
-
-  border-radius: 14px;
-  background: #f4faff;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  color: #245675;
-
-  font-size: 14px;
-  font-weight: 700;
-  text-align: left;
-}
-
-.side-icon {
-  width: 28px;
-  flex-shrink: 0;
-  text-align: center;
-  font-size: 20px;
-}
-
-/* =========================
-   РОЗРОБНИК
-========================= */
 
 .developer-credit {
   position: fixed;
   right: 10px;
-  bottom: calc(7px + env(safe-area-inset-bottom));
-
+  bottom: 8px;
   z-index: 40;
-
   font-size: 10px;
   font-weight: 600;
   letter-spacing: .4px;
-
   color: transparent;
-  -webkit-text-stroke: .6px rgba(23,105,209,.45);
-
+  -webkit-text-stroke: 0.6px rgba(23,105,209,.45);
   opacity: .65;
   pointer-events: none;
   white-space: nowrap;
 }
 
 /* =========================
-   ДУЖЕ МАЛЕНЬКІ ЕКРАНИ
+   ВНУТРІШНІ СТОРІНКИ
 ========================= */
 
-@media (max-width: 350px) {
+.inner-header {
+  position: relative;
+  text-align: center;
+  padding: 8px 45px 18px;
+}
 
-  .header {
-    padding-left: 50px;
-    padding-right: 50px;
-  }
+.inner-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1769d1;
+}
 
-  .menu-grid {
-    gap: 6px;
-  }
+.inner-content {
+  margin-top: 5px;
+}
 
-  .menu-card {
-    min-height: 65px;
-    font-size: 9.5px;
-  }
+.section-btn {
+  width: 100%;
+  min-height: 56px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(23,105,209,.18);
+  border-radius: 15px;
+  background: rgba(255,255,255,.8);
+  color: #1769d1;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  padding: 14px 17px;
+  box-shadow: 0 4px 12px rgba(30,100,150,.06);
+}
 
-  .menu-card svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .developer-credit {
-    font-size: 8px;
-  }
+/* Назад */
+.back-btn {
+  width: 100%;
+  margin-bottom: 13px;
+  padding: 11px 14px;
+  border: 1px solid rgba(23,105,209,.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,.62);
+  color: #1769d1;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
 }
 
 /* =========================
-   ВЕЛИКІ ЕКРАНИ
+   ЧАТ
 ========================= */
 
-@media (min-width: 700px) {
+.chat-header {
+  text-align: center;
+  padding: 8px 0 14px;
+}
 
-  .main-screen {
-    max-width: 720px;
-    margin: 0 auto;
+.chat-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1769d1;
+}
+
+/* ☰ саме зліва */
+.chat-menu-btn {
+  display: block;
+  width: 44px;
+  height: 42px;
+  margin: 0 0 8px 0;
+  border: 1px solid rgba(23,105,209,.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,.72);
+  color: #1769d1;
+  font-size: 24px;
+}
+
+/* Головне меню в чаті */
+.home-btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  border: 1px solid rgba(23,105,209,.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,.65);
+  color: #1769d1;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* =========================
+   БІЧНА ПАНЕЛЬ
+========================= */
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  left: -290px;
+  width: 275px;
+  height: 100vh;
+  background: #f5fbff;
+  box-shadow: 8px 0 25px rgba(0,0,0,.12);
+  z-index: 100;
+  padding: 22px 16px;
+  transition: left .25s ease;
+}
+
+.side-panel.open {
+  left: 0;
+}
+
+.panel-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1769d1;
+  margin: 5px 0 22px;
+}
+
+.panel-btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 9px;
+  padding: 14px;
+  border: 1px solid rgba(23,105,209,.15);
+  border-radius: 13px;
+  background: white;
+  color: #1769d1;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.22);
+  z-index: 90;
+}
+
+.overlay.open {
+  display: block;
+}
+
+/* =========================
+   ТЕКСТ
+========================= */
+
+.placeholder {
+  padding: 25px 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(23,105,209,.15);
+  text-align: center;
+  color: #52758e;
+  line-height: 1.5;
+}
+
+/* =========================
+   ТЕЛЕФОНИ
+========================= */
+
+@media (max-width: 380px) {
+  .app {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
-  .main-menu-button {
-    right: max(14px, calc((100vw - 720px) / 2));
+  .logo-title {
+    font-size: 27px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .menu-btn {
+    min-height: 62px;
+    font-size: 13px;
+  }
+
+  .menu-icon {
+    font-size: 20px;
   }
 }
 </style>
@@ -545,566 +344,498 @@ button:active {
 
 <body>
 
-<!-- =====================================================
+<div class="app">
+
+<!-- =========================
      ГОЛОВНА
-===================================================== -->
+========================= -->
 
-<section id="mainScreen" class="main-screen">
+<section id="home" class="page active">
 
-  <!-- ☰ СПРАВА ЗВЕРХУ -->
-  <button
-    class="main-menu-button"
-    type="button"
-    onclick="openChat()"
-    aria-label="Відкрити чат">
-    ☰
-  </button>
+  <div class="main-header">
 
-  <header class="header">
-    <h1>NTV HUB</h1>
-    <p>Навчально-тренувальний відділ ЕМД м. Рівне</p>
-  </header>
-
-  <div class="menu-grid">
-
-    <button class="menu-card" type="button" onclick="showPage('emdPage')">
-      <i data-lucide="heart-pulse"></i>
-      <span>ЕМД</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('learningPage')">
-      <i data-lucide="graduation-cap"></i>
-      <span>НАВЧАННЯ</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('testsPage')">
-      <i data-lucide="clipboard-check"></i>
-      <span>ТЕСТИ</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('bprPage')">
-      <i data-lucide="award"></i>
-      <span>БПР</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('normPage')">
-      <i data-lucide="book-open"></i>
-      <span>НОРМАТИВНА БАЗА</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('appsPage')">
-      <i data-lucide="grid-2x2"></i>
-      <span>ДОДАТКИ</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('newsPage')">
-      <i data-lucide="newspaper"></i>
-      <span>НОВИНИ</span>
-    </button>
-
-    <button class="menu-card" type="button" onclick="showPage('contactsPage')">
-      <i data-lucide="contact"></i>
-      <span>КОНТАКТИ</span>
-    </button>
-
-  </div>
-
-  <div class="actual-title">
-    АКТУАЛЬНЕ СЬОГОДНІ
-  </div>
-
-  <img
-    src="IMG_3499.jpeg"
-    alt=""
-    class="logo-image">
-
-</section>
-
-
-<!-- =====================================================
-     ЕМД
-===================================================== -->
-
-<section id="emdPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">ЕМД</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>BLS</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>PBLS</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>ALS</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Травма</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Педіатрія</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     НАВЧАННЯ
-===================================================== -->
-
-<section id="learningPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">НАВЧАННЯ</div>
-  </div>
-
-  <div class="submenu">
-
-    <button
-      class="submenu-item"
-      type="button"
-      onclick="showPage('coursesPage')">
-      <span>Курси</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Тренінги</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Практичні навички</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     КУРСИ
-===================================================== -->
-
-<section id="coursesPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button
-      class="back-button"
-      type="button"
-      onclick="showPage('learningPage')">
-      ‹
-    </button>
-
-    <div class="inner-title">КУРСИ</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Онлайн</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Офлайн</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     НОРМАТИВНА БАЗА
-===================================================== -->
-
-<section id="normPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">НОРМАТИВНА БАЗА</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Накази</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Документи</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-    <button class="submenu-item" type="button">
-      <span>Протоколи</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     ТЕСТИ
-===================================================== -->
-
-<section id="testsPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">ТЕСТИ</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Тести NTV HUB</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     БПР
-===================================================== -->
-
-<section id="bprPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">БПР</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Заходи БПР</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     ДОДАТКИ
-===================================================== -->
-
-<section id="appsPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">ДОДАТКИ</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Додані інструменти та застосунки</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     НОВИНИ
-===================================================== -->
-
-<section id="newsPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">НОВИНИ</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Новини NTV HUB</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     КОНТАКТИ
-===================================================== -->
-
-<section id="contactsPage" class="inner-screen">
-
-  <div class="inner-header">
-    <button class="back-button" type="button" onclick="goHome()">‹</button>
-    <div class="inner-title">КОНТАКТИ</div>
-  </div>
-
-  <div class="submenu">
-
-    <button class="submenu-item" type="button">
-      <span>Контакти НТВ</span>
-      <span class="submenu-arrow">›</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =====================================================
-     ЧАТ
-===================================================== -->
-
-<section id="chatScreen" class="chat-screen">
-
-  <div class="chat-header">
-    💬 ЧАТ
-  </div>
-
-  <!-- ☰ ЗЛІВА ПІД НАПИСОМ ЧАТ -->
-
-  <div class="chat-menu-bar">
-
-    <button
-      class="chat-menu-button"
-      type="button"
-      onclick="openSidePanel()"
-      aria-label="Відкрити бічне меню">
+    <button class="main-menu-btn" onclick="openPage('chat')">
       ☰
     </button>
 
-    <button
-      class="home-return-button"
-      type="button"
-      onclick="goHome()">
-      ← ГОЛОВНЕ МЕНЮ
+    <div class="logo-title">NTV HUB</div>
+
+    <div class="subtitle">
+      Навчально-тренувальний відділ ЕМД м. Рівне
+    </div>
+
+  </div>
+
+  <div class="menu-grid">
+
+    <button class="menu-btn" onclick="openPage('emd')">
+      <span class="menu-icon">🩺</span>
+      ЕМД
+    </button>
+
+    <button class="menu-btn" onclick="openPage('training')">
+      <span class="menu-icon">🎓</span>
+      НАВЧАННЯ
+    </button>
+
+    <button class="menu-btn" onclick="openPage('tests')">
+      <span class="menu-icon">✓</span>
+      ТЕСТИ
+    </button>
+
+    <button class="menu-btn" onclick="openPage('bpr')">
+      <span class="menu-icon">📜</span>
+      БПР
+    </button>
+
+    <button class="menu-btn" onclick="openPage('normative')">
+      <span class="menu-icon">▤</span>
+      НОРМАТИВНА БАЗА
+    </button>
+
+    <button class="menu-btn" onclick="openPage('apps')">
+      <span class="menu-icon">▦</span>
+      ДОДАТКИ
+    </button>
+
+    <button class="menu-btn" onclick="openPage('news')">
+      <span class="menu-icon">▤</span>
+      НОВИНИ
+    </button>
+
+    <button class="menu-btn" onclick="openPage('contacts')">
+      <span class="menu-icon">⌖</span>
+      КОНТАКТИ
     </button>
 
   </div>
 
-  <div class="chat-body">
+  <div class="today">
+    АКТУАЛЬНЕ СЬОГОДНІ
+  </div>
 
-    <div class="chat-placeholder">
-      Тут буде робочий чат NTV HUB
-    </div>
+  <img src="IMG_3499.jpeg" class="main-logo">
 
-    <div class="chat-input-area">
+</section>
 
-      <input
-        class="chat-input"
-        type="text"
-        placeholder="Написати повідомлення...">
 
-      <button class="chat-send" type="button">
-        <i data-lucide="send"></i>
-      </button>
+<!-- =========================
+     ЕМД
+========================= -->
 
-    </div>
+<section id="emd" class="page">
+
+  <div class="inner-header">
+    <div class="inner-title">ЕМД</div>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+
+  <div class="inner-content">
+
+    <button class="section-btn" onclick="openPage('bls')">
+      BLS
+    </button>
+
+    <button class="section-btn" onclick="openPage('pbls')">
+      PBLS
+    </button>
+
+    <button class="section-btn" onclick="openPage('als')">
+      ALS
+    </button>
+
+    <button class="section-btn" onclick="openPage('trauma')">
+      Травма
+    </button>
+
+    <button class="section-btn" onclick="openPage('pediatrics')">
+      Педіатрія
+    </button>
 
   </div>
 
 </section>
 
 
-<!-- =====================================================
-     БІЧНЕ МЕНЮ
-===================================================== -->
+<!-- =========================
+     НАВЧАННЯ
+========================= -->
 
-<div
-  id="sidePanelBackground"
-  class="side-panel-background"
-  onclick="closeSidePanel(event)">
+<section id="training" class="page">
 
-  <aside
-    class="side-panel"
-    onclick="event.stopPropagation()">
+  <div class="inner-header">
+    <div class="inner-title">НАВЧАННЯ</div>
+  </div>
 
-    <h2 class="side-panel-title">
-      NTV HUB
-    </h2>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
 
-    <button
-      class="side-item"
-      type="button"
-      onclick="closeSidePanel()">
+  <div class="inner-content">
 
-      <span class="side-icon">💬</span>
-      <span>ЧАТ</span>
-
+    <button class="section-btn" onclick="openPage('courses')">
+      Курси
     </button>
 
-    <button class="side-item" type="button">
-      <span class="side-icon">🩺</span>
-      <span>КЕЙСИ</span>
+    <button class="section-btn" onclick="openPage('trainings')">
+      Тренінги
     </button>
 
-    <button class="side-item" type="button">
-      <span class="side-icon">📅</span>
-      <span>КАЛЕНДАР НАВЧАНЬ</span>
+    <button class="section-btn" onclick="openPage('skills')">
+      Практичні навички
     </button>
 
-    <button class="side-item" type="button">
-      <span class="side-icon">📢</span>
-      <span>ОГОЛОШЕННЯ</span>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     КУРСИ
+========================= -->
+
+<section id="courses" class="page">
+
+  <div class="inner-header">
+    <div class="inner-title">КУРСИ</div>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+
+  <div class="inner-content">
+
+    <button class="section-btn" onclick="openPage('online')">
+      Онлайн
     </button>
 
-    <button class="side-item" type="button">
-      <span class="side-icon">⚠️</span>
-      <span>ПОВІДОМИТИ ПРО ПРОБЛЕМУ</span>
+    <button class="section-btn" onclick="openPage('offline')">
+      Офлайн
     </button>
 
-  </aside>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     НОРМАТИВНА БАЗА
+========================= -->
+
+<section id="normative" class="page">
+
+  <div class="inner-header">
+    <div class="inner-title">НОРМАТИВНА БАЗА</div>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+
+  <div class="inner-content">
+
+    <button class="section-btn" onclick="openPage('orders')">
+      Накази
+    </button>
+
+    <button class="section-btn" onclick="openPage('documents')">
+      Документи
+    </button>
+
+    <button class="section-btn" onclick="openPage('protocols')">
+      Протоколи
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ЧАТ
+========================= -->
+
+<section id="chat" class="page">
+
+  <div class="chat-header">
+    <div class="chat-title">💬 ЧАТ</div>
+  </div>
+
+  <button class="chat-menu-btn" onclick="openSidePanel()">
+    ☰
+  </button>
+
+  <button class="home-btn" onclick="goHome()">
+    ← ГОЛОВНЕ МЕНЮ
+  </button>
+
+  <div class="placeholder">
+    Тут буде спільний чат NTV HUB.
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ІНШІ РОЗДІЛИ
+========================= -->
+
+<section id="tests" class="page">
+  <div class="inner-header">
+    <div class="inner-title">ТЕСТИ</div>
+  </div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Розділ тестування.</div>
+</section>
+
+
+<section id="bpr" class="page">
+  <div class="inner-header">
+    <div class="inner-title">БПР</div>
+  </div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Розділ безперервного професійного розвитку.</div>
+</section>
+
+
+<section id="apps" class="page">
+  <div class="inner-header">
+    <div class="inner-title">ДОДАТКИ</div>
+  </div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">
+    Тут з'являтимуться додатки та корисні інструменти.
+  </div>
+</section>
+
+
+<section id="news" class="page">
+  <div class="inner-header">
+    <div class="inner-title">НОВИНИ</div>
+  </div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Актуальні новини NTV HUB.</div>
+</section>
+
+
+<section id="contacts" class="page">
+  <div class="inner-header">
+    <div class="inner-title">КОНТАКТИ</div>
+  </div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Контактна інформація NTV.</div>
+</section>
+
+
+<!-- =========================
+     СТОРІНКИ ПІДРОЗДІЛІВ
+========================= -->
+
+<section id="bls" class="page">
+  <div class="inner-header"><div class="inner-title">BLS</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Матеріали BLS.</div>
+</section>
+
+
+<section id="pbls" class="page">
+  <div class="inner-header"><div class="inner-title">PBLS</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Матеріали PBLS.</div>
+</section>
+
+
+<section id="als" class="page">
+  <div class="inner-header"><div class="inner-title">ALS</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Матеріали ALS.</div>
+</section>
+
+
+<section id="trauma" class="page">
+  <div class="inner-header"><div class="inner-title">ТРАВМА</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Матеріали з травми.</div>
+</section>
+
+
+<section id="pediatrics" class="page">
+  <div class="inner-header"><div class="inner-title">ПЕДІАТРІЯ</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Матеріали з педіатрії.</div>
+</section>
+
+
+<section id="online" class="page">
+  <div class="inner-header"><div class="inner-title">ОНЛАЙН</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Онлайн-курси NTV HUB.</div>
+</section>
+
+
+<section id="offline" class="page">
+  <div class="inner-header"><div class="inner-title">ОФЛАЙН</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Офлайн-курси NTV HUB.</div>
+</section>
+
+
+<section id="trainings" class="page">
+  <div class="inner-header"><div class="inner-title">ТРЕНІНГИ</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Тренінги NTV HUB.</div>
+</section>
+
+
+<section id="skills" class="page">
+  <div class="inner-header"><div class="inner-title">ПРАКТИЧНІ НАВИЧКИ</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Практичні навички NTV HUB.</div>
+</section>
+
+
+<section id="orders" class="page">
+  <div class="inner-header"><div class="inner-title">НАКАЗИ</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Нормативні накази.</div>
+</section>
+
+
+<section id="documents" class="page">
+  <div class="inner-header"><div class="inner-title">ДОКУМЕНТИ</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Нормативні документи.</div>
+</section>
+
+
+<section id="protocols" class="page">
+  <div class="inner-header"><div class="inner-title">ПРОТОКОЛИ</div></div>
+  <button class="back-btn" onclick="goBack()">← НАЗАД</button>
+  <div class="placeholder">Протоколи та алгоритми.</div>
+</section>
+
 </div>
 
 
-<!-- =====================================================
-     РОЗРОБНИК
-===================================================== -->
+<!-- =========================
+     БІЧНА ПАНЕЛЬ ЧАТУ
+========================= -->
 
-<div class="developer-credit">
-  Розробник: Анна Соколова
-</div>
+<div id="overlay" class="overlay" onclick="closeSidePanel()"></div>
+
+<aside id="sidePanel" class="side-panel">
+
+  <div class="panel-title">NTV HUB</div>
+
+  <button class="panel-btn" onclick="panelOpen('chat')">
+    💬 ЧАТ
+  </button>
+
+  <button class="panel-btn" onclick="panelOpen('cases')">
+    🩺 КЕЙСИ
+  </button>
+
+  <button class="panel-btn" onclick="panelOpen('calendar')">
+    📅 КАЛЕНДАР НАВЧАНЬ
+  </button>
+
+  <button class="panel-btn" onclick="panelOpen('announcements')">
+    📢 ОГОЛОШЕННЯ
+  </button>
+
+  <button class="panel-btn" onclick="panelOpen('problem')">
+    ⚠️ ПОВІДОМИТИ ПРО ПРОБЛЕМУ
+  </button>
+
+</aside>
 
 
 <script>
 
 /* =========================
-   ІНІЦІАЛІЗАЦІЯ
+   НАВІГАЦІЯ
 ========================= */
 
-if (window.lucide) {
-  lucide.createIcons();
+let currentPage = "home";
+let navStack = [];
+
+/* відкрити нову сторінку */
+function openPage(id) {
+
+  if (id === currentPage) return;
+
+  navStack.push(currentPage);
+
+  showPage(id);
 }
 
-
-/* =========================
-   ПОКАЗ СТОРІНКИ
-========================= */
-
-function hideAll() {
-
-  var innerPages = document.querySelectorAll(".inner-screen");
-
-  for (var i = 0; i < innerPages.length; i++) {
-    innerPages[i].classList.remove("active");
-  }
-
-  document
-    .getElementById("mainScreen")
-    .style.display = "none";
-
-  document
-    .getElementById("chatScreen")
-    .classList.remove("active");
-}
-
-
+/* показати сторінку */
 function showPage(id) {
 
-  hideAll();
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
 
-  var page = document.getElementById(id);
+  const page = document.getElementById(id);
 
   if (page) {
     page.classList.add("active");
+    currentPage = id;
     window.scrollTo(0, 0);
   }
 }
 
+/* назад на один крок */
+function goBack() {
 
-/* =========================
-   ГОЛОВНЕ МЕНЮ
-========================= */
+  if (navStack.length > 0) {
 
+    const previousPage = navStack.pop();
+
+    showPage(previousPage);
+
+  } else {
+
+    showPage("home");
+
+  }
+}
+
+/* головне меню */
 function goHome() {
 
-  var innerPages = document.querySelectorAll(".inner-screen");
+  navStack = [];
+  showPage("home");
 
-  for (var i = 0; i < innerPages.length; i++) {
-    innerPages[i].classList.remove("active");
-  }
-
-  document
-    .getElementById("chatScreen")
-    .classList.remove("active");
-
-  document
-    .getElementById("mainScreen")
-    .style.display = "block";
-
-  window.scrollTo(0, 0);
+  closeSidePanel();
 }
 
 
 /* =========================
-   ЧАТ
-========================= */
-
-function openChat() {
-
-  var innerPages = document.querySelectorAll(".inner-screen");
-
-  for (var i = 0; i < innerPages.length; i++) {
-    innerPages[i].classList.remove("active");
-  }
-
-  document
-    .getElementById("mainScreen")
-    .style.display = "none";
-
-  document
-    .getElementById("chatScreen")
-    .classList.add("active");
-
-  window.scrollTo(0, 0);
-}
-
-
-/* =========================
-   БІЧНЕ МЕНЮ
+   БІЧНА ПАНЕЛЬ
 ========================= */
 
 function openSidePanel() {
 
-  document
-    .getElementById("sidePanelBackground")
-    .classList.add("open");
+  document.getElementById("sidePanel").classList.add("open");
+  document.getElementById("overlay").classList.add("open");
 }
 
+function closeSidePanel() {
 
-function closeSidePanel(event) {
+  document.getElementById("sidePanel").classList.remove("open");
+  document.getElementById("overlay").classList.remove("open");
+}
 
-  var panel = document.getElementById("sidePanelBackground");
+function panelOpen(id) {
 
-  if (
-    !event ||
-    event.target === panel
-  ) {
-    panel.classList.remove("open");
+  closeSidePanel();
+
+  if (document.getElementById(id)) {
+    openPage(id);
   }
 }
+
+
+/* =========================
+   ДОДАТКОВІ СТОРІНКИ ЧАТУ
+========================= */
 
 </script>
 

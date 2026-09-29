@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NTV HUB</title>
 
-<script src="https://unpkg.com/lucide@latest"></script>
-
 <style>
 *{box-sizing:border-box}
 
@@ -26,7 +24,7 @@ button{cursor:pointer}
 
 .app{
   min-height:100vh;
-  padding:24px 14px 45px;
+  padding:24px 14px 55px;
 }
 
 .page{
@@ -35,13 +33,17 @@ button{cursor:pointer}
   margin:0 auto;
 }
 
-.page.active{display:block}
+.page.active{
+  display:block;
+}
 
-/* ГОЛОВНА */
+/* =====================
+   ГОЛОВНА
+===================== */
 
 .main-header{
   text-align:center;
-  padding:18px 48px 18px;
+  padding:18px 50px 18px;
   position:relative;
 }
 
@@ -56,7 +58,7 @@ button{cursor:pointer}
   margin-top:7px;
   font-size:14px;
   color:#4b7394;
-  line-height:1.3;
+  line-height:1.35;
 }
 
 .main-menu-btn{
@@ -67,12 +69,14 @@ button{cursor:pointer}
   height:42px;
   border:1px solid rgba(23,105,209,.25);
   border-radius:12px;
-  background:rgba(255,255,255,.72);
+  background:rgba(255,255,255,.75);
   color:#1769d1;
-  font-size:24px;
+  font-size:23px;
 }
 
-/* ГОЛОВНЕ МЕНЮ */
+/* =====================
+   ГОЛОВНІ КАРТКИ
+===================== */
 
 .menu-grid{
   display:grid;
@@ -82,10 +86,10 @@ button{cursor:pointer}
 }
 
 .menu-btn{
-  min-height:68px;
+  min-height:70px;
   border:1px solid rgba(23,105,209,.18);
   border-radius:17px;
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.82);
   box-shadow:0 5px 15px rgba(30,100,150,.08);
   color:#1769d1;
   font-size:14px;
@@ -93,18 +97,27 @@ button{cursor:pointer}
   padding:10px;
 }
 
-.menu-icon{
+.menu-btn:active{
+  transform:scale(.97);
+}
+
+/* ВБУДОВАНІ КОНТУРНІ ЗНАЧКИ */
+
+.icon{
+  width:23px;
+  height:23px;
+  margin:0 auto 6px;
   display:block;
-  margin-bottom:6px;
+  fill:none;
+  stroke:#1769d1;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-.menu-icon svg{
-  width:22px;
-  height:22px;
-  stroke-width:1.8;
-}
-
-/* АКТУАЛЬНЕ */
+/* =====================
+   АКТУАЛЬНЕ
+===================== */
 
 .today{
   margin-top:14px;
@@ -128,6 +141,8 @@ button{cursor:pointer}
   opacity:.4;
 }
 
+/* РОЗРОБНИК */
+
 .developer-credit{
   position:fixed;
   right:10px;
@@ -136,14 +151,15 @@ button{cursor:pointer}
   font-size:10px;
   font-weight:600;
   letter-spacing:.4px;
-  color:transparent;
-  -webkit-text-stroke:.6px rgba(23,105,209,.45);
-  opacity:.65;
+  color:rgba(23,105,209,.55);
+  opacity:.75;
   pointer-events:none;
   white-space:nowrap;
 }
 
-/* ВНУТРІШНІ СТОРІНКИ */
+/* =====================
+   ВНУТРІШНІ СТОРІНКИ
+===================== */
 
 .inner-header{
   text-align:center;
@@ -162,7 +178,7 @@ button{cursor:pointer}
   padding:11px 14px;
   border:1px solid rgba(23,105,209,.2);
   border-radius:12px;
-  background:rgba(255,255,255,.62);
+  background:rgba(255,255,255,.65);
   color:#1769d1;
   font-size:14px;
   font-weight:700;
@@ -175,13 +191,12 @@ button{cursor:pointer}
   margin-bottom:10px;
   border:1px solid rgba(23,105,209,.18);
   border-radius:15px;
-  background:rgba(255,255,255,.8);
+  background:rgba(255,255,255,.82);
   color:#1769d1;
   font-size:15px;
   font-weight:700;
   text-align:left;
   padding:14px 17px;
-  box-shadow:0 4px 12px rgba(30,100,150,.06);
 }
 
 .placeholder{
@@ -194,7 +209,9 @@ button{cursor:pointer}
   line-height:1.5;
 }
 
-/* ЧАТ */
+/* =====================
+   ЧАТ
+===================== */
 
 .chat-header{
   text-align:center;
@@ -214,7 +231,7 @@ button{cursor:pointer}
   margin:0 0 8px 0;
   border:1px solid rgba(23,105,209,.2);
   border-radius:12px;
-  background:rgba(255,255,255,.72);
+  background:rgba(255,255,255,.75);
   color:#1769d1;
   font-size:24px;
 }
@@ -233,68 +250,68 @@ button{cursor:pointer}
   text-align:left;
 }
 
-/* ПОВІДОМЛЕННЯ */
+/* ВІКНО ЧАТУ */
 
 .chat-window{
-  min-height:300px;
-  max-height:50vh;
+  height:320px;
   overflow-y:auto;
   padding:12px;
-  margin-bottom:12px;
-  border:1px solid rgba(23,105,209,.13);
+  margin-bottom:10px;
+  border:1px solid rgba(23,105,209,.15);
   border-radius:16px;
-  background:rgba(255,255,255,.42);
+  background:rgba(255,255,255,.45);
 }
 
 .empty-chat{
   text-align:center;
-  color:#7693a8;
+  color:#7895a9;
   font-size:13px;
-  padding-top:110px;
+  padding-top:135px;
 }
+
+/* ПОЛЕ НАПИСАННЯ */
 
 .chat-input-row{
   display:flex;
+  width:100%;
   gap:8px;
-  align-items:center;
 }
 
 .chat-input{
   flex:1;
   min-width:0;
-  height:46px;
+  height:48px;
   padding:0 14px;
-  border:1px solid rgba(23,105,209,.2);
+  border:1px solid rgba(23,105,209,.25);
   border-radius:14px;
-  outline:none;
-  background:rgba(255,255,255,.9);
+  background:white;
   color:#164b78;
   font-size:14px;
+  outline:none;
+}
+
+.chat-input::placeholder{
+  color:#8aa1b2;
 }
 
 .chat-input:focus{
-  border-color:#5b9ee8;
+  border-color:#1769d1;
 }
 
 .send-btn{
-  width:46px;
-  height:46px;
+  width:48px;
+  height:48px;
   flex:none;
   border:0;
   border-radius:14px;
   background:#1769d1;
   color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  font-size:21px;
 }
 
-.send-btn svg{
-  width:20px;
-  height:20px;
-}
-
-/* БІЧНА ПАНЕЛЬ */
+/* =====================
+   БІЧНЕ МЕНЮ
+===================== */
 
 .side-panel{
   position:fixed;
@@ -309,7 +326,9 @@ button{cursor:pointer}
   transition:left .25s ease;
 }
 
-.side-panel.open{left:0}
+.side-panel.open{
+  left:0;
+}
 
 .panel-title{
   font-size:20px;
@@ -340,20 +359,31 @@ button{cursor:pointer}
   z-index:90;
 }
 
-.overlay.open{display:block}
+.overlay.open{
+  display:block;
+}
+
+/* =====================
+   МАЛЕНЬКІ ЕКРАНИ
+===================== */
 
 @media(max-width:380px){
+
   .app{
     padding-left:10px;
     padding-right:10px;
   }
 
-  .logo-title{font-size:27px}
+  .logo-title{
+    font-size:27px;
+  }
 
-  .subtitle{font-size:13px}
+  .subtitle{
+    font-size:13px;
+  }
 
   .menu-btn{
-    min-height:62px;
+    min-height:64px;
     font-size:13px;
   }
 }
@@ -364,13 +394,17 @@ button{cursor:pointer}
 
 <div class="app">
 
-<!-- ГОЛОВНА -->
+<!-- =====================
+     ГОЛОВНА
+===================== -->
 
 <section id="home" class="page active">
 
   <div class="main-header">
 
-    <button class="main-menu-btn" onclick="openPage('chat')">☰</button>
+    <button class="main-menu-btn" onclick="openPage('chat')">
+      ☰
+    </button>
 
     <div class="logo-title">NTV HUB</div>
 
@@ -380,61 +414,113 @@ button{cursor:pointer}
 
   </div>
 
+
   <div class="menu-grid">
 
+    <!-- ЕМД -->
     <button class="menu-btn" onclick="openPage('emd')">
-      <span class="menu-icon"><i data-lucide="heart-pulse"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M20.8 8.6c0 5.4-8.8 10.1-8.8 10.1S3.2 14 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2Z"/>
+        <path d="M12 7v6"/>
+        <path d="M9 10h6"/>
+      </svg>
       ЕМД
     </button>
 
+    <!-- НАВЧАННЯ -->
     <button class="menu-btn" onclick="openPage('training')">
-      <span class="menu-icon"><i data-lucide="graduation-cap"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M2 10l10-5 10 5-10 5-10-5Z"/>
+        <path d="M6 12.5V17c3 2 9 2 12 0v-4.5"/>
+        <path d="M22 10v6"/>
+      </svg>
       НАВЧАННЯ
     </button>
 
+    <!-- ТЕСТИ -->
     <button class="menu-btn" onclick="openPage('tests')">
-      <span class="menu-icon"><i data-lucide="clipboard-check"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <rect x="4" y="3" width="16" height="18" rx="2"/>
+        <path d="M8 8h8"/>
+        <path d="m8 13 1.5 1.5L12 12"/>
+        <path d="M14 14h2"/>
+      </svg>
       ТЕСТИ
     </button>
 
+    <!-- БПР -->
     <button class="menu-btn" onclick="openPage('bpr')">
-      <span class="menu-icon"><i data-lucide="award"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M8 12 6 21l6-3 6 3-2-9"/>
+      </svg>
       БПР
     </button>
 
+    <!-- НОРМАТИВНА БАЗА -->
     <button class="menu-btn" onclick="openPage('normative')">
-      <span class="menu-icon"><i data-lucide="book-open"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22V4.5Z"/>
+        <path d="M4 4.5V22"/>
+        <path d="M8 6h8"/>
+        <path d="M8 10h8"/>
+      </svg>
       НОРМАТИВНА БАЗА
     </button>
 
+    <!-- ДОДАТКИ -->
     <button class="menu-btn" onclick="openPage('apps')">
-      <span class="menu-icon"><i data-lucide="grid-2x2"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="6" height="6" rx="1"/>
+        <rect x="14" y="4" width="6" height="6" rx="1"/>
+        <rect x="4" y="14" width="6" height="6" rx="1"/>
+        <rect x="14" y="14" width="6" height="6" rx="1"/>
+      </svg>
       ДОДАТКИ
     </button>
 
+    <!-- НОВИНИ -->
     <button class="menu-btn" onclick="openPage('news')">
-      <span class="menu-icon"><i data-lucide="newspaper"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M4 4h16v16H4z"/>
+        <path d="M8 8h8"/>
+        <path d="M8 12h8"/>
+        <path d="M8 16h5"/>
+      </svg>
       НОВИНИ
     </button>
 
+    <!-- КОНТАКТИ -->
     <button class="menu-btn" onclick="openPage('contacts')">
-      <span class="menu-icon"><i data-lucide="map-pin"></i></span>
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+        <circle cx="12" cy="10" r="2.5"/>
+      </svg>
       КОНТАКТИ
     </button>
 
   </div>
 
-  <div class="today">АКТУАЛЬНЕ СЬОГОДНІ</div>
+
+  <div class="today">
+    АКТУАЛЬНЕ СЬОГОДНІ
+  </div>
 
   <img src="IMG_3499.jpeg" class="main-logo">
 
 </section>
 
 
-<!-- ЕМД -->
+<!-- =====================
+     ЕМД
+===================== -->
 
 <section id="emd" class="page">
-  <div class="inner-header"><div class="inner-title">ЕМД</div></div>
+
+  <div class="inner-header">
+    <div class="inner-title">ЕМД</div>
+  </div>
+
   <button class="back-btn" onclick="goBack()">← НАЗАД</button>
 
   <button class="section-btn" onclick="openPage('bls')">BLS</button>
@@ -442,45 +528,69 @@ button{cursor:pointer}
   <button class="section-btn" onclick="openPage('als')">ALS</button>
   <button class="section-btn" onclick="openPage('trauma')">Травма</button>
   <button class="section-btn" onclick="openPage('pediatrics')">Педіатрія</button>
+
 </section>
 
 
-<!-- НАВЧАННЯ -->
+<!-- =====================
+     НАВЧАННЯ
+===================== -->
 
 <section id="training" class="page">
-  <div class="inner-header"><div class="inner-title">НАВЧАННЯ</div></div>
+
+  <div class="inner-header">
+    <div class="inner-title">НАВЧАННЯ</div>
+  </div>
+
   <button class="back-btn" onclick="goBack()">← НАЗАД</button>
 
   <button class="section-btn" onclick="openPage('courses')">Курси</button>
   <button class="section-btn" onclick="openPage('trainings')">Тренінги</button>
   <button class="section-btn" onclick="openPage('skills')">Практичні навички</button>
+
 </section>
 
 
-<!-- КУРСИ -->
+<!-- =====================
+     КУРСИ
+===================== -->
 
 <section id="courses" class="page">
-  <div class="inner-header"><div class="inner-title">КУРСИ</div></div>
+
+  <div class="inner-header">
+    <div class="inner-title">КУРСИ</div>
+  </div>
+
   <button class="back-btn" onclick="goBack()">← НАЗАД</button>
 
   <button class="section-btn" onclick="openPage('online')">Онлайн</button>
   <button class="section-btn" onclick="openPage('offline')">Офлайн</button>
+
 </section>
 
 
-<!-- НОРМАТИВНА БАЗА -->
+<!-- =====================
+     НОРМАТИВНА БАЗА
+===================== -->
 
 <section id="normative" class="page">
-  <div class="inner-header"><div class="inner-title">НОРМАТИВНА БАЗА</div></div>
+
+  <div class="inner-header">
+    <div class="inner-title">НОРМАТИВНА БАЗА</div>
+  </div>
+
   <button class="back-btn" onclick="goBack()">← НАЗАД</button>
 
   <button class="section-btn" onclick="openPage('orders')">Накази</button>
   <button class="section-btn" onclick="openPage('documents')">Документи</button>
   <button class="section-btn" onclick="openPage('protocols')">Протоколи</button>
+
 </section>
 
 
-<!-- ЧАТ -->
+<!-- =====================
+     ЧАТ
+===================== -->
 
 <section id="chat" class="page">
 
@@ -488,17 +598,27 @@ button{cursor:pointer}
     <div class="chat-title">💬 ЧАТ</div>
   </div>
 
+  <!-- ☰ ЗЛІВА -->
   <button class="chat-menu-btn" onclick="openSidePanel()">☰</button>
 
+  <!-- ГОЛОВНЕ МЕНЮ -->
   <button class="home-btn" onclick="goHome()">
     ← ГОЛОВНЕ МЕНЮ
   </button>
 
+
+  <!-- ВІКНО ПОВІДОМЛЕНЬ -->
+
   <div id="chatWindow" class="chat-window">
+
     <div id="emptyChat" class="empty-chat">
       Повідомлень поки немає
     </div>
+
   </div>
+
+
+  <!-- РЯДОК НАПИСАННЯ -->
 
   <div class="chat-input-row">
 
@@ -507,11 +627,10 @@ button{cursor:pointer}
       class="chat-input"
       type="text"
       placeholder="Написати повідомлення..."
-      onkeydown="handleEnter(event)"
     >
 
     <button class="send-btn" onclick="sendMessage()">
-      <i data-lucide="send"></i>
+      ➤
     </button>
 
   </div>
@@ -519,7 +638,9 @@ button{cursor:pointer}
 </section>
 
 
-<!-- ІНШІ РОЗДІЛИ -->
+<!-- =====================
+     ІНШІ РОЗДІЛИ
+===================== -->
 
 <section id="tests" class="page">
   <div class="inner-header"><div class="inner-title">ТЕСТИ</div></div>
@@ -536,7 +657,9 @@ button{cursor:pointer}
 <section id="apps" class="page">
   <div class="inner-header"><div class="inner-title">ДОДАТКИ</div></div>
   <button class="back-btn" onclick="goBack()">← НАЗАД</button>
-  <div class="placeholder">Тут з'являтимуться додатки та корисні інструменти.</div>
+  <div class="placeholder">
+    Тут з'являтимуться додатки та корисні інструменти.
+  </div>
 </section>
 
 <section id="news" class="page">
@@ -552,7 +675,9 @@ button{cursor:pointer}
 </section>
 
 
-<!-- ПІДРОЗДІЛИ ЕМД -->
+<!-- =====================
+     ЕМД ПІДРОЗДІЛИ
+===================== -->
 
 <section id="bls" class="page">
   <div class="inner-header"><div class="inner-title">BLS</div></div>
@@ -585,7 +710,9 @@ button{cursor:pointer}
 </section>
 
 
-<!-- КУРСИ -->
+<!-- =====================
+     КУРСИ
+===================== -->
 
 <section id="online" class="page">
   <div class="inner-header"><div class="inner-title">ОНЛАЙН</div></div>
@@ -612,7 +739,9 @@ button{cursor:pointer}
 </section>
 
 
-<!-- НОРМАТИВИ -->
+<!-- =====================
+     НОРМАТИВИ
+===================== -->
 
 <section id="orders" class="page">
   <div class="inner-header"><div class="inner-title">НАКАЗИ</div></div>
@@ -635,7 +764,18 @@ button{cursor:pointer}
 </div>
 
 
-<!-- БІЧНЕ МЕНЮ -->
+<!-- =====================
+     РОЗРОБНИК
+===================== -->
+
+<div class="developer-credit">
+  Розробник: Анна Соколова
+</div>
+
+
+<!-- =====================
+     БІЧНЕ МЕНЮ
+===================== -->
 
 <div id="overlay" class="overlay" onclick="closeSidePanel()"></div>
 
@@ -668,6 +808,10 @@ button{cursor:pointer}
 
 <script>
 
+/* =====================
+   НАВІГАЦІЯ
+===================== */
+
 let currentPage = "home";
 let navStack = [];
 
@@ -681,7 +825,7 @@ function openPage(id){
 
 function showPage(id){
 
-  document.querySelectorAll(".page").forEach(page=>{
+  document.querySelectorAll(".page").forEach(function(page){
     page.classList.remove("active");
   });
 
@@ -691,10 +835,6 @@ function showPage(id){
     page.classList.add("active");
     currentPage=id;
     window.scrollTo(0,0);
-  }
-
-  if(typeof lucide !== "undefined"){
-    lucide.createIcons();
   }
 }
 
@@ -720,7 +860,9 @@ function goHome(){
 }
 
 
-/* БІЧНА ПАНЕЛЬ */
+/* =====================
+   БІЧНЕ МЕНЮ
+===================== */
 
 function openSidePanel(){
 
@@ -744,7 +886,9 @@ function panelOpen(id){
 }
 
 
-/* ЧАТ */
+/* =====================
+   ЧАТ
+===================== */
 
 function sendMessage(){
 
@@ -762,7 +906,7 @@ function sendMessage(){
   const message=document.createElement("div");
 
   message.style.cssText=
-    "background:#1769d1;color:white;padding:9px 12px;border-radius:14px;margin-bottom:8px;width:max-content;max-width:85%;margin-left:auto;font-size:14px;";
+    "background:#1769d1;color:#fff;padding:10px 13px;border-radius:14px;margin:0 0 9px auto;width:max-content;max-width:85%;font-size:14px;line-height:1.35;";
 
   message.textContent=text;
 
@@ -774,20 +918,17 @@ function sendMessage(){
     document.getElementById("chatWindow").scrollHeight;
 }
 
-function handleEnter(event){
+
+/* ENTER = НАДІСЛАТИ */
+
+document.getElementById("chatInput").addEventListener("keydown",function(event){
 
   if(event.key==="Enter"){
     event.preventDefault();
     sendMessage();
   }
-}
 
-
-/* ІКОНКИ */
-
-if(typeof lucide !== "undefined"){
-  lucide.createIcons();
-}
+});
 
 </script>
 

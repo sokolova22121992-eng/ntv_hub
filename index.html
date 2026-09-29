@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NTV SYSTEM</title>
+  <title>NTV HUB</title>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     * {
@@ -13,129 +16,242 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f3f4f6;
-      color: #17202a;
+      background: #f5f7f8;
+      color: #172126;
     }
 
     .header {
       background: #ffffff;
-      padding: 28px 20px 22px;
-      text-align: center;
-      border-bottom: 1px solid #e5e7eb;
+      padding: 28px 22px 24px;
+      border-bottom: 1px solid #e6eaec;
     }
 
     .logo {
-      width: 78px;
-      height: 78px;
-      border-radius: 20px;
-      object-fit: cover;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 26px;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
     }
 
     .subtitle {
-      margin-top: 6px;
-      color: #6b7280;
+      margin-top: 5px;
+      color: #7b858b;
       font-size: 14px;
     }
 
-    .menu {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      max-width: 600px;
+    .container {
+      padding: 22px 16px 35px;
+      max-width: 650px;
       margin: auto;
     }
 
-    .button {
-      border: none;
+    .menu {
+      display: grid;
+      gap: 12px;
+    }
+
+    .item {
+      background: #ffffff;
+      border: 1px solid #e6eaec;
       border-radius: 18px;
-      background: white;
-      padding: 22px 10px;
-      font-size: 16px;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      cursor: pointer;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .item:active {
+      transform: scale(0.98);
     }
 
     .icon {
-      display: block;
-      font-size: 28px;
-      margin-bottom: 8px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #eef3f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .footer {
-      text-align: center;
-      padding: 15px;
-      color: #9ca3af;
-      font-size: 12px;
+    .icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 1.8;
+    }
+
+    .text {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .arrow {
+      margin-left: auto;
+      color: #9aa4a9;
+    }
+
+    .arrow svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .section {
+      margin-top: 12px;
+    }
+
+    .subitems {
+      display: none;
+      padding: 8px 0 2px 64px;
+      gap: 8px;
+    }
+
+    .subitem {
+      background: #ffffff;
+      border: 1px solid #e8ecee;
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 14px;
+      color: #465158;
+    }
+
+    .section.open .subitems {
+      display: grid;
+    }
+
+    .section.open .arrow {
+      transform: rotate(90deg);
     }
   </style>
 </head>
 
 <body>
 
-  <div class="header">
-    <h1>🚑 NTV SYSTEM</h1>
-    <div class="subtitle">Екстрена медицина</div>
-  </div>
+  <header class="header">
+    <div class="logo">NTV HUB</div>
+    <div class="subtitle">Навчально-тренувальний відділ ЕМД</div>
+  </header>
 
-  <div class="menu">
+  <main class="container">
 
-    <button class="button" onclick="openSection('BLS')">
-      <span class="icon">🫀</span>
-      BLS
-    </button>
+    <div class="menu">
 
-    <button class="button" onclick="openSection('ALS')">
-      <span class="icon">⚡</span>
-      ALS
-    </button>
+      <!-- 1. ЕМД -->
+      <div class="section">
+        <div class="item" onclick="toggleSection(this)">
+          <div class="icon">
+            <i data-lucide="activity"></i>
+          </div>
+          <div class="text">ЕМД</div>
+          <div class="arrow">
+            <i data-lucide="chevron-right"></i>
+          </div>
+        </div>
 
-    <button class="button" onclick="openSection('Травма')">
-      <span class="icon">🩸</span>
-      Травма
-    </button>
+        <div class="subitems">
+          <div class="subitem">BLS</div>
+          <div class="subitem">ALS</div>
+          <div class="subitem">Травма</div>
+          <div class="subitem">PBLS</div>
+        </div>
+      </div>
 
-    <button class="button" onclick="openSection('Тести')">
-      <span class="icon">📝</span>
-      Тести
-    </button>
+      <!-- 2. Нормативна база -->
+      <div class="section">
+        <div class="item" onclick="toggleSection(this)">
+          <div class="icon">
+            <i data-lucide="file-check"></i>
+          </div>
+          <div class="text">Нормативна база</div>
+          <div class="arrow">
+            <i data-lucide="chevron-right"></i>
+          </div>
+        </div>
 
-    <button class="button" onclick="openSection('Матеріали')">
-      <span class="icon">📚</span>
-      Матеріали
-    </button>
+        <div class="subitems">
+          <div class="subitem">Документи</div>
+          <div class="subitem">Накази</div>
+        </div>
+      </div>
 
-    <button class="button" onclick="openSection('БПР')">
-      <span class="icon">🎓</span>
-      БПР
-    </button>
+      <!-- 3. Тести -->
+      <a class="item" href="#">
+        <div class="icon">
+          <i data-lucide="clipboard-check"></i>
+        </div>
+        <div class="text">Тести</div>
+        <div class="arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </a>
 
-    <button class="button" onclick="openSection('Розклад')">
-      <span class="icon">📅</span>
-      Розклад
-    </button>
+      <!-- 4. БПР -->
+      <a class="item" href="#">
+        <div class="icon">
+          <i data-lucide="graduation-cap"></i>
+        </div>
+        <div class="text">БПР</div>
+        <div class="arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </a>
 
-    <button class="button" onclick="openSection('Контакти')">
-      <span class="icon">☎️</span>
-      Контакти
-    </button>
+      <!-- 5. Навчання -->
+      <a class="item" href="#">
+        <div class="icon">
+          <i data-lucide="book-open"></i>
+        </div>
+        <div class="text">Навчання</div>
+        <div class="arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </a>
 
-  </div>
+      <!-- 6. Додатки -->
+      <a class="item" href="#">
+        <div class="icon">
+          <i data-lucide="smartphone"></i>
+        </div>
+        <div class="text">Додатки</div>
+        <div class="arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </a>
 
-  <div class="footer">
-    NTV SYSTEM
-  </div>
+      <!-- 7. Новини -->
+      <a class="item" href="#">
+        <div class="icon">
+          <i data-lucide="newspaper"></i>
+        </div>
+        <div class="text">Новини</div>
+        <div class="arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </a>
+
+      <!-- 8. Контакти -->
+      <a class="item" href="#">
+        <div class="icon">
+          <i data-lucide="contact-round"></i>
+        </div>
+        <div class="text">Контакти</div>
+        <div class="arrow">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </a>
+
+    </div>
+  </main>
 
   <script>
-    function openSection(section) {
-      alert("Розділ: " + section + "\n\nЦей розділ ми налаштуємо наступним кроком.");
+    lucide.createIcons();
+
+    function toggleSection(element) {
+      const section = element.parentElement;
+      section.classList.toggle("open");
     }
   </script>
 

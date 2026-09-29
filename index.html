@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTV SYSTEM</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      color: #17202a;
+    }
+
+    .header {
+      background: #ffffff;
+      padding: 28px 20px 22px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      width: 78px;
+      height: 78px;
+      border-radius: 20px;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .menu {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .button {
+      border: none;
+      border-radius: 18px;
+      background: white;
+      padding: 22px 10px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+
+    .icon {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 15px;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>🚑 NTV SYSTEM</h1>
+    <div class="subtitle">Екстрена медицина</div>
+  </div>
+
+  <div class="menu">
+
+    <button class="button" onclick="openSection('BLS')">
+      <span class="icon">🫀</span>
+      BLS
+    </button>
+
+    <button class="button" onclick="openSection('ALS')">
+      <span class="icon">⚡</span>
+      ALS
+    </button>
+
+    <button class="button" onclick="openSection('Травма')">
+      <span class="icon">🩸</span>
+      Травма
+    </button>
+
+    <button class="button" onclick="openSection('Тести')">
+      <span class="icon">📝</span>
+      Тести
+    </button>
+
+    <button class="button" onclick="openSection('Матеріали')">
+      <span class="icon">📚</span>
+      Матеріали
+    </button>
+
+    <button class="button" onclick="openSection('БПР')">
+      <span class="icon">🎓</span>
+      БПР
+    </button>
+
+    <button class="button" onclick="openSection('Розклад')">
+      <span class="icon">📅</span>
+      Розклад
+    </button>
+
+    <button class="button" onclick="openSection('Контакти')">
+      <span class="icon">☎️</span>
+      Контакти
+    </button>
+
+  </div>
+
+  <div class="footer">
+    NTV SYSTEM
+  </div>
+
+  <script>
+    function openSection(section) {
+      alert("Розділ: " + section + "\n\nЦей розділ ми налаштуємо наступним кроком.");
+    }
+  </script>
+
+</body>
+</html>
